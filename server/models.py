@@ -12,10 +12,10 @@ class User(db.Model, SerializerMixin):
 
     # creating columns
     id = db.Column(db.Integer, primary_key = True)
-    first_name = db.Column(db.String(32), nullable = False)
-    last_name = db.Column(db.String(32), nullable = False)
-    email = db.Column(db.String(32), unique = True, nullable = False)
-    password = db.Column(db.String(32), nullable = False)
+    first_name = db.Column(db.String(), nullable = False)
+    last_name = db.Column(db.String(), nullable = False)
+    email = db.Column(db.String(), unique = True, nullable = False)
+    password = db.Column(db.String(), nullable = False)
     contact = db.Column(db.Integer(), nullable=False)
     user_role = db.Column(db.String(), nullable = False)
 
@@ -56,8 +56,8 @@ class Admin(db.Model, SerializerMixin):
 
     # creating columns
     id = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String(32), unique = True, nullable = False)
-    password = db.Column(db.String(32), nullable = False)
+    email = db.Column(db.String(), unique = True, nullable = False)
+    password = db.Column(db.String(), nullable = False)
     #  Foreign key from the user_id
     user_id = db.Column(db.Integer(), db.ForeignKey("users.id"))
 
@@ -77,8 +77,8 @@ class Buyer(db.Model, SerializerMixin):
 
     # creating columns
     id = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String(32), unique = True, nullable = False)
-    password = db.Column(db.String(32), nullable = False)
+    email = db.Column(db.String(), unique = True, nullable = False)
+    password = db.Column(db.String(), nullable = False)
     #  Foreign key from the user_id
     user_id = db.Column(db.Integer(), db.ForeignKey("users.id"))
 
@@ -142,7 +142,7 @@ class Feature(db.Model, SerializerMixin):
 
     # creating columns
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(256), nullable = False)
+    name = db.Column(db.String(), nullable = False)
     # Foreign Key from the property id
     property_id = db.Column(db.Integer, db.ForeignKey("properties.id"))
 
@@ -164,7 +164,7 @@ class Image(db.Model, SerializerMixin):
 
     # creating columns
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(256), nullable = False)
+    name = db.Column(db.String(), nullable = False)
     # Foreign Key from the property id
     property_id = db.Column(db.Integer, db.ForeignKey("properties.id"))
 
@@ -186,7 +186,7 @@ class Infrastructure(db.Model, SerializerMixin):
 
     # creating columns
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(256), nullable = False)
+    name = db.Column(db.String(), nullable = False)
     # Foreign Key from the property id
     property_id = db.Column(db.Integer, db.ForeignKey("properties.id"))
 

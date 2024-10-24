@@ -1,5 +1,6 @@
 {
   "name": "sep_realtors",
+  "proxy": "https://sep-realators.onrender.com",
   "private": true,
   "version": "0.0.0",
   "type": "module",

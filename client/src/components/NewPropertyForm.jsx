@@ -47,7 +47,7 @@ function NewPropertyForm() {
                 price: Number(values.price) 
             };
 
-            fetch("http://127.0.0.1:5555/properties", {
+            fetch("https://sep-realators.onrender.com/properties", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

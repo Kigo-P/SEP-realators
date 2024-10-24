@@ -37,7 +37,7 @@ function ForgotPassword() {
         onSubmit: async (values) => {
             setLoading(true);
             try {
-                const response = await fetch(`http://127.0.0.1:5555/user-by-email/${values.email}`, {
+                const response = await fetch(`https://sep-realators.onrender.com/user-by-email/${values.email}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",

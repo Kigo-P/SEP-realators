@@ -27,7 +27,7 @@ const AdminPage = () => {
     
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:5555/users/${id}`)
+        fetch(`https://sep-realators.onrender.com/users/${id}`)
             .then((response) => response.json())
             .then((data) => setUser(data))
             .catch((error) => console.error('Error fetching bought properties:', error));
@@ -36,7 +36,7 @@ const AdminPage = () => {
 
     useEffect(() => {
         if (activeTab === 'boughtProperties') {
-            fetch('http://127.0.0.1:5555/bought-properties',{
+            fetch('https://sep-realators.onrender.com/bought-properties',{
                 method: "GET",
                 headers:{
                     'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const AdminPage = () => {
                 .catch(error => console.error('Error fetching purchase requests:', error));
 
         } else if (activeTab === 'updateProperty' || activeTab === 'deleteProperty') {
-            fetch('http://127.0.0.1:5555/properties', {
+            fetch('hhttps://sep-realators.onrender.com/properties', {
                 method: "GET",
                 headers:{
                     'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const AdminPage = () => {
                 })
                 .catch(error => console.error('Error fetching properties:', error));
         } else if (activeTab === 'approvePurchases') {
-            fetch('http://127.0.0.1:5555/purchases',{
+            fetch('https://sep-realators.onrender.com/purchases',{
                 method: "GET",
                 headers:{
                     'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const AdminPage = () => {
                 .then(data => setPurchaseRequests(data))
                 .catch(error => console.error('Error fetching purchase requests:', error));        
         }else if (activeTab === 'deleteAdmins'){
-            fetch('http://127.0.0.1:5555/admins',{
+            fetch('https://sep-realators.onrender.com/admins',{
                 method: "GET",
                 headers:{
                     'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ const AdminPage = () => {
                 .catch(error => console.error('Error fetching admins:', error)); 
         }
         else if (activeTab === 'contactUs'){
-            fetch('http://127.0.0.1:5555/contact-uss',{
+            fetch('https://sep-realators.onrender.com/contact-uss',{
                 method: "GET",
                 headers:{
                     'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const AdminPage = () => {
     }, [activeTab]);
 
     const handleUpdateProperty = (propertyId, updatedData) => {
-        fetch(`http://127.0.0.1:5555/properties/${propertyId}`, {
+        fetch(`https://sep-realators.onrender.com/properties/${propertyId}`, {
             method: 'PATCH',
             body: JSON.stringify(updatedData),
             headers: {
@@ -126,7 +126,7 @@ const AdminPage = () => {
 
 
     const handleDeleteProperty = (propertyId) => {
-        fetch(`http://127.0.0.1:5555/properties/${propertyId}`, {
+        fetch(`https://sep-realators.onrender.com/properties/${propertyId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -144,7 +144,7 @@ const AdminPage = () => {
 
 
     function handleApproveRequest(id){
-        fetch(`http://127.0.0.1:5555/purchase-requests/${id}`, {
+        fetch(`https://sep-realators.onrender.com/purchase-requests/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -163,7 +163,7 @@ const AdminPage = () => {
     
 
         function handleRejectRequest(id){
-            fetch(`http://127.0.0.1:5555/purchase-requests/${id}`, {
+            fetch(`https://sep-realators.onrender.com/purchase-requests/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -180,7 +180,7 @@ const AdminPage = () => {
             });
         }
     const handleDeleteAdmin = (id) => {
-        fetch(`http://127.0.0.1:5555/users/${id}`, {
+        fetch(`https://sep-realators.onrender.com/users/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

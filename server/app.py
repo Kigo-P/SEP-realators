@@ -10,6 +10,8 @@ from datetime import timezone
 import datetime
 from functools import wraps
 
+import os
+
 # initializing JWTManager
 jwt = JWTManager(app)
 

@@ -32,7 +32,9 @@ function Home() {
               alt="Modern cityscape with tall buildings"
               style={styles.image}
             />
+              
             <div style={styles.overlay}>
+            <h1 style={styles.view}>SEP REALTORS</h1>
               <h1 style={styles.headline}>Find Your Dream Home</h1>
               <p style={styles.subheadline}>
                 "Home is where love resides, memories are created, friends always belong, and laughter never ends."
@@ -80,6 +82,12 @@ const styles = {
     width: '100%',
     height: '100%',
     objectFit: 'cover',
+  },
+  view: {
+    fontSize: '5rem',
+    fontWeight: 'bold',
+    color: '#FFD701',
+  
   },
   overlay: {
     position: 'absolute',

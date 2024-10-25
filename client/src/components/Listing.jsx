@@ -76,26 +76,44 @@ const Listing = () => {
         setFilters((prevFilters) => ({ ...prevFilters, ...newFilters }));
     };
     
-    function handleBuyProperty(propertyId, id){
-        fetch(`https://sep-realators.onrender.com/properties/${propertyId}/purchase`,{
+    const handleBuyProperty = (propertyId, userId) => {
+        fetch(`https://sep-realators.onrender.com/properties/${propertyId}/purchase`, {
             method: "POST",
-            headers:{
+            headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 "Authorization": `Bearer ${localStorage.getItem("access_token")}`
             },
             body: JSON.stringify({
-                user_id : id,
-                property_id : propertyId,
-                status :"pending"  
+                user_id: userId,
+                property_id: propertyId,
+                status: "pending"
             })
         })
         .then((response) => response.json())
-
-        .then(data => {console.log(data)
-            window.location.reload();
+        .then(data => {
+            console.log(data);
+            // Update the local state for the purchased property
+            setProperties((prevProperties) =>
+                prevProperties.map((property) => {
+                    if (property.id === propertyId) {
+                        return {
+                            ...property,
+                            purchase_requests: [...property.purchase_requests, {
+                                status: "pending",
+                                // Add any other fields returned in the purchase response if needed
+                            }]
+                        };
+                    }
+                    return property;
+                })
+            );
         })
-    }
+        .catch(error => {
+            console.error('Error buying property:', error);
+        });
+    };
+    
    
     return (
         <>
@@ -132,42 +150,38 @@ const Listing = () => {
                                             <a href={`/property/${item.id}`} className="view-details">View Details</a>
                                             
                                             {
-                                            item.purchase_requests.length > 0 ? (
-                                                <button 
-                                                    className={`buy ${
-                                                        item.purchase_requests[item.purchase_requests.length - 1].status === 'pending' ||
-                                                        item.purchase_requests[item.purchase_requests.length - 1].status === 'approved' 
-                                                        ? 'disabled:opacity-50' : ''
-                                                    }`} 
-                                                    onClick={() => {
-                                                        if (item.purchase_requests[item.purchase_requests.length - 1].status === 'rejected') {
-                                                            console.log('Button clicked');
-                                                            handleBuyProperty(item.id, user.id);
+                                                item.purchase_requests.length > 0 ? (
+                                                    <button 
+                                                        className={`buy ${
+                                                            item.purchase_requests[item.purchase_requests.length - 1].status === 'pending' ||
+                                                            item.purchase_requests[item.purchase_requests.length - 1].status === 'approved' 
+                                                            ? 'disabled:opacity-50' : ''
+                                                        }`} 
+                                                        onClick={() => {
+                                                            if (item.purchase_requests[item.purchase_requests.length - 1].status === 'rejected') {
+                                                                handleBuyProperty(item.id, user.id);
+                                                            }
+                                                        }}
+                                                        disabled={item.purchase_requests[item.purchase_requests.length - 1].status === 'pending' || 
+                                                                item.purchase_requests[item.purchase_requests.length - 1].status === 'approved'}
+                                                    >
+                                                        {   
+                                                            item.purchase_requests[item.purchase_requests.length - 1].status === 'pending' 
+                                                                ? 'Pending' 
+                                                                : item.purchase_requests[item.purchase_requests.length - 1].status === "approved" 
+                                                                ? "Bought" 
+                                                                : "Buy"
                                                         }
-                                                    }}
-                                                    disabled={item.purchase_requests[item.purchase_requests.length - 1].status === 'pending' || 
-                                                            item.purchase_requests[item.purchase_requests.length - 1].status === 'approved'}
-                                                >
-                                                    {   
-                                                        item.purchase_requests[item.purchase_requests.length - 1].status === 'pending' 
-                                                            ? 'Pending' 
-                                                            : item.purchase_requests[item.purchase_requests.length - 1].status === "approved" 
-                                                            ? "Bought" 
-                                                            : "Buy"
-                                                    }
-                                                </button>
-                                            ) : (
-                                                <button 
-                                                    className="buy" 
-                                                    onClick={() => {
-                                                        console.log('Button clicked');
-                                                        handleBuyProperty(item.id, user.id);
-                                                    }}
-                                                >
-                                                    Buy
-                                                </button>
-                                            )
-                                        }
+                                                    </button>
+                                                ) : (
+                                                    <button 
+                                                        className="buy" 
+                                                        onClick={() => handleBuyProperty(item.id, user.id)}
+                                                    >
+                                                        Buy
+                                                    </button>
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 ))}

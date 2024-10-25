@@ -44,9 +44,9 @@ function Login({ closeModal }) {
           localStorage.setItem("access_token", data.access_token)
           localStorage.setItem("user_id", data.user_data.id);
           if (data.user_data.user_role === "admin") {
-            window.location.href = `/admin-page/${localStorage.getItem("user_id")}`;
+            window.location.href = `https://sep-realators.onrender.com/admin-page/${localStorage.getItem("user_id")}`;
           } else if (data.user_data.user_role === "buyer") {
-            window.location.href = `/buyer-page/${localStorage.getItem("user_id")}`;
+            window.location.href = `https://sep-realators.onrender.com/buyer-page/${localStorage.getItem("user_id")}`;
           }
           toast.success("Login successful!");
         } else {

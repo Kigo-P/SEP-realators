@@ -49,7 +49,7 @@ const AdminPage = () => {
                 .catch(error => console.error('Error fetching purchase requests:', error));
 
         } else if (activeTab === 'updateProperty' || activeTab === 'deleteProperty') {
-            fetch('hhttps://sep-realators.onrender.com/properties', {
+            fetch('https://sep-realators.onrender.com/properties', {
                 method: "GET",
                 headers:{
                     'Content-Type': 'application/json',
@@ -123,7 +123,6 @@ const AdminPage = () => {
         })
         .catch(error => console.error('Error updating property:', error));
     };
-
 
     const handleDeleteProperty = (propertyId) => {
         fetch(`https://sep-realators.onrender.com/properties/${propertyId}`, {
@@ -238,10 +237,7 @@ const AdminPage = () => {
                                 className="bg-white shadow-md rounded-lg p-4 border border-gray-200 hover:shadow-lg transition duration-200"
                             >
                                 <img
-                                    src={property.images && property.images[0] 
-                                        ? `${property.images[0]}?id=${Math.floor(Math.random() * 11)}` 
-                                        : `https://picsum.photos/200/300?id=${property.id}`
-                                      }
+                                    src={`${property.images[0]}?id=${Math.floor(Math.random() * 11)}` || `https://picsum.photos/200/300?id=${property.id}`}
                                     alt={property.title}
                                     className="w-full h-48 object-cover rounded mb-4"
                                 />
@@ -276,10 +272,7 @@ const AdminPage = () => {
                                 className="bg-white shadow-md rounded-lg p-4 border border-gray-200 hover:shadow-lg transition duration-200"
                             >
                                 <img
-                                    src={property.images && property.images[0] 
-                                        ? `${property.images[0]}?id=${Math.floor(Math.random() * 11)}` 
-                                        : `https://picsum.photos/200/300?id=${property.id}`
-                                      }
+                                    src={`${property.images[0]}?id=${Math.floor(Math.random() * 11)}` || `https://picsum.photos/200/300?id=${property.id}`}
                                     alt={property.title}
                                     className="w-full h-48 object-cover rounded mb-4"
                                 />

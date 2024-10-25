@@ -116,9 +116,8 @@ const Listing = () => {
                                 : filteredProperties.map((item, i) => (
                                     <div key={i} className="property-card">
                                         <img
-                                             src={item.images && item.images[0] ? `${item.images[0]}?id=${Math.floor(Math.random() * 11)}` : `https://picsum.photos/200/300?id=${item.id}`}
-                                                alt=""
-                                          
+                                            src={`${item.images[0]}?id=${Math.floor(Math.random() * 11)}` || `https://picsum.photos/200/300?id=${item.id}`}
+                                            alt=""
                                         />
                                         <div className="property-info">
                                             <h2><b>{item.title}</b></h2>

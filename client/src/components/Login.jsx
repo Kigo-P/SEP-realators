@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Login({ closeModal }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -41,12 +44,12 @@ function Login({ closeModal }) {
         setLoading(false);
 
         if (data.user_data) {
-          localStorage.setItem("access_token", data.access_token)
+          localStorage.setItem("access_token", data.access_token);
           localStorage.setItem("user_id", data.user_data.id);
           if (data.user_data.user_role === "admin") {
-            window.location.href = `https://sep-realators.onrender.com/admin-page/${localStorage.getItem("user_id")}`;
+              navigate(`/admin-page/${localStorage.getItem("user_id")}`);
           } else if (data.user_data.user_role === "buyer") {
-            window.location.href = `https://sep-realators.onrender.com/buyer-page/${localStorage.getItem("user_id")}`;
+              navigate(`/buyer-page/${localStorage.getItem("user_id")}`);
           }
           toast.success("Login successful!");
         } else {

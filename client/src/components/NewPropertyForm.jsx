@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import "./App3.css";
 
 function NewPropertyForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const navigate = useNavigate();
-
+ 
     
     const initialValues = {
         title: '',
@@ -60,7 +58,6 @@ function NewPropertyForm() {
                 console.log("Property submitted:", data);
                 setIsSubmitting(false);
                 formik.resetForm();
-                navigate('/listing');
             })
             .catch((error) => {
                 console.error("Error submitting property:", error);

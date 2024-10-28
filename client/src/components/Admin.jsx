@@ -17,6 +17,7 @@ const AdminPage = () => {
     const [user, setUser] = useState(null);
     const [admins, setAdmins] = useState([]);
     const [contacts, setContacts] = useState([]);
+    const [disabledRequests, setDisabledRequests] = useState([])
 
     const params = useParams();
     const id = params.id
@@ -143,6 +144,9 @@ const AdminPage = () => {
 
 
     function handleApproveRequest(id){
+
+        setDisabledRequests((prev) => [...prev, id])
+
         fetch(`https://sep-realators.onrender.com/purchase-requests/${id}`, {
             method: "PATCH",
             headers: {
@@ -162,6 +166,9 @@ const AdminPage = () => {
     
 
         function handleRejectRequest(id){
+
+            setDisabledRequests((prev) => [...prev, id])
+
             fetch(`https://sep-realators.onrender.com/purchase-requests/${id}`, {
                 method: "PATCH",
                 headers: {
@@ -359,13 +366,23 @@ const AdminPage = () => {
                                     <div className="mt-4">
                                     <button 
                                         onClick={() => handleApproveRequest(request.id)} 
-                                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mr-2"
+                                        className={`px-4 py-2 rounded mr-2 
+                                            ${disabledRequests.includes(request.id) 
+                                                ? "bg-green-500 text-white opacity-50 cursor-not-allowed" 
+                                                : "bg-green-500 text-white hover:bg-green-600"}`
+                                        }
+                                        disabled={disabledRequests.includes(request.id)}
                                     >
                                         Approve
                                     </button>
                                         <button 
                                             onClick={() => handleRejectRequest(request.id)} 
-                                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                            className={`px-4 py-2 rounded mr-2 
+                                                ${disabledRequests.includes(request.id) 
+                                                    ? "bg-red-500 text-white opacity-50 cursor-not-allowed" 
+                                                    : "bg-red-500 text-white hover:bg-red-600"}`
+                                            }
+                                            disabled={disabledRequests.includes(request.id)}
                                         >
                                             Reject
                                         </button>

@@ -197,7 +197,7 @@ const Listing = () => {
                         font-family: Arial, sans-serif;
                         max-width: 1200px;
                         margin: 0 auto;
-                        padding: 10px;
+                        padding: 12px;
                     }
 
                     .property-grid {
